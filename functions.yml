@@ -1,0 +1,29 @@
+version: 1
+functions:
+
+  healthcheck:
+    handler: src.handlers.healthcheck.lambda_handler
+    http:
+      path: healthcheck
+      methods:
+        - get
+      authLevel: anonymous
+      cors: true
+
+  test:
+    handler: src.handlers.test.lambda_handler
+    http:
+      path: test 
+      methods:
+        - get 
+      authLevel: anonymous
+      cors: true
+
+  test2:
+    handler: src.handlers.test2.lambda_handler
+    http:
+      path: test2
+      methods: 
+        - get 
+      authLevel: anonymous
+      cors: True
