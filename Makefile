@@ -1,5 +1,5 @@
 FUNC ?= func
-APP ?= 
+APP ?= $(FUNCTION_NAME)
 
 .PHONY: start deploy
 
@@ -8,3 +8,6 @@ start:
 
 deploy:
 	$(FUNC) azure functionapp publish $(APP) --incremental
+
+info: 
+	$(FUNC) azure functionapp list-functions $(APP) --show-keys
