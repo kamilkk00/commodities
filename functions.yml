@@ -2,7 +2,7 @@ version: 1
 functions:
 
   healthcheck:
-    handler: src.handlers.healthcheck.handler
+    handler: src.handlers.tests.healthcheck.handler
     http:
       path: healthcheck
       methods:
@@ -11,7 +11,7 @@ functions:
       cors: true
 
   test:
-    handler: src.handlers.test.handler
+    handler: src.handlers.tests.test.handler
     http:
       path: test 
       methods:
@@ -20,7 +20,7 @@ functions:
       cors: true
 
   number:
-    handler: src.handlers.check.handler
+    handler: src.handlers.tests.check.handler
     http:
       path: numbers
       methods:
