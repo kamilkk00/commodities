@@ -19,10 +19,10 @@ functions:
       authLevel: anonymous
       cors: true
 
-  test2:
+  b:
     handler: src.handlers.test2.lambda_handler
     http:
-      path: test2
+      path: b
       methods: 
         - get 
       authLevel: anonymous
