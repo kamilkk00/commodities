@@ -27,3 +27,12 @@ functions:
         - post
       authLevel: anonymous
       cors: True
+
+  commodities_brent: 
+    handler: src.handlers.commodities.brent.handler
+    http:
+      path: commodities_brent
+      methods: 
+        - post 
+      authLevel: anonymous
+      cors: True 
