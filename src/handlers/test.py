@@ -4,7 +4,7 @@ import json
 import azure.functions as func
 from azure.functions import HttpRequest, HttpResponse
 
-def lambda_handler(req: HttpRequest) -> HttpResponse:
+def handler(req: HttpRequest) -> HttpResponse:
     """
     Returns HTTP 200 OK with {"test":"works"}.
     """
