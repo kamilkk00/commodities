@@ -4,3 +4,4 @@
 
 azure-functions
 pyyaml
+azure-cosmos>=4.0.0
