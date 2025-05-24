@@ -2,7 +2,6 @@ import os
 import sys
 import json
 from azure.cosmos import CosmosClient, exceptions
-from datetime import datetime
 
 # adjust path so that `utils.config` is importable
 sys.path.append(
@@ -26,7 +25,7 @@ def lookup_by_date(container, date_str):
     except exceptions.CosmosResourceNotFoundError:
         print(f"No record found for {date_str!r}")
 
-def list_date_range(container, start, end, page_size=10):
+def list_date_range(container, start, end):
     sql = """
       SELECT c.id, c.date, c.spotPrice
       FROM c
@@ -38,39 +37,21 @@ def list_date_range(container, start, end, page_size=10):
         { "name":"@end",   "value": end   }
     ]
 
-    # get the pages iterator
-    pages = container.query_items(
+    # Simple single-pass query (no manual paging)
+    for item in container.query_items(
         query=sql,
         parameters=params,
         enable_cross_partition_query=True
-    ).by_page(page_size)
-
-    for page in pages:
-        items = list(page)
-        if not items:
-            # nothing more to fetch
-            break
-        print(f"\n--- Next {len(items)} items ---")
-        for item in items:
-            print(f"{item['date']}: {item['spotPrice']}")
+    ):
+        print(f"{item['date']}: {item['spotPrice']}")
 
 def main():
     container = get_container()
 
-    raw = input(
-      "Enter a date (YYYY-MM-DD) or a range YYYY-MM-DD:YYYY-MM-DD (no backticks or quotes): "
-    ).strip()
-    # strip any backticks or quotes the user might have typed
-    raw = raw.strip('`"\'').strip()
-
-    if ':' in raw:
-        start, end = raw.split(':', 1)
-        # normalize order
-        if start > end:
-            start, end = end, start
-        list_date_range(container, start, end)
-    else:
-        lookup_by_date(container, raw)
+    # Hard-coded range for this example
+    start, end = "2025-05-09", "2025-05-16"
+    print(f"Fetching Brent prices from {start} to {end}:\n")
+    list_date_range(container, start, end)
 
 if __name__ == "__main__":
     main()
