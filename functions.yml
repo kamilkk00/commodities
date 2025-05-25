@@ -10,15 +10,6 @@ functions:
       authLevel: anonymous
       cors: true
 
-  test:
-    handler: src.handlers.tests.test.handler
-    http:
-      path: test 
-      methods:
-        - get 
-      authLevel: anonymous
-      cors: true
-
   number:
     handler: src.handlers.tests.check.handler
     http:
