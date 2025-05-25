@@ -20,9 +20,9 @@ class FetchBrentPrice:
     def lookup_by_date(self, date_str):
         try:
             doc = self.container.read_item(item=date_str, partition_key=date_str)
-            print(json.dumps(doc, indent=2, default=str))
+            return(doc['spotPrice'])
         except exceptions.CosmosResourceNotFoundError:
-            print(f"No record found for {date_str!r}")
+            return(f"No record found for {date_str!r}")
 
     def list_date_range(self, start, end):
         sql = (
@@ -35,25 +35,28 @@ class FetchBrentPrice:
             {"name": "@start", "value": start},
             {"name": "@end",   "value": end}
         ]
+        result = []
         for item in self.container.query_items(
             query=sql,
             parameters=params,
             enable_cross_partition_query=True
         ):
-            print(f"{item['date']}: {item['spotPrice']}")
-
+            result.append(f"{item['date']}: {item['spotPrice']}")
+        return result
 
 def main():
     # fetcher = FetchBrentPrice()
     # # Hard-coded range for this example
     # start, end = "2025-05-09", "2025-05-16"
     # print(f"Fetching Brent prices from {start} to {end}:\n")
-    # fetcher.list_date_range(start, end)
+    # price = fetcher.list_date_range(start, end)
+    # print (price)
 
     fetcher = FetchBrentPrice()
     # Single-date fetch for example
     date = "2025-05-12"
-    fetcher.lookup_by_date(date)
+    price = fetcher.lookup_by_date(date)
+    print(price)
     
 
 if __name__ == "__main__":
