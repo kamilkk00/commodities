@@ -44,11 +44,17 @@ class FetchBrentPrice:
 
 
 def main():
+    # fetcher = FetchBrentPrice()
+    # # Hard-coded range for this example
+    # start, end = "2025-05-09", "2025-05-16"
+    # print(f"Fetching Brent prices from {start} to {end}:\n")
+    # fetcher.list_date_range(start, end)
+
     fetcher = FetchBrentPrice()
-    # Hard-coded range for this example
-    start, end = "2025-05-09", "2025-05-16"
-    print(f"Fetching Brent prices from {start} to {end}:\n")
-    fetcher.list_date_range(start, end)
+    # Single-date fetch for example
+    date = "2025-05-12"
+    fetcher.lookup_by_date(date)
+    
 
 if __name__ == "__main__":
     main()
