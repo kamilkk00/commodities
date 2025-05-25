@@ -13,7 +13,7 @@ def main():
     endpoint   = cfg.COSMOS_ENDPOINT_COMMODITIES
     key        = cfg.COSMOS_KEY_COMMODITIES
     database   = cfg.COSMOS_DB_COMMODITIES
-    container  = cfg.COSMOS_CONTAINER_WTI
+    container  = cfg.COSMOS_CONTAINER_NATURAL_GAS
 
     # create client + container handle
     client = CosmosClient(endpoint, credential=key)
@@ -22,7 +22,7 @@ def main():
         .get_container_client(container)
 
     # stream through your JSONL and upsert each document
-    with open("wti.jsonl", "r", encoding="utf-8") as f:
+    with open("natural_gas.jsonl", "r", encoding="utf-8") as f:
         for line in f:
             doc = json.loads(line)
             try:

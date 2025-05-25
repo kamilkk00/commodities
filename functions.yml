@@ -36,3 +36,12 @@ functions:
         - post 
       authLevel: anonymous
       cors: True 
+
+  commodities_natural_gas: 
+    handler: src.handlers.commodities.natural_gas.handler
+    http:
+      path: commodities_natural_gas
+      methods: 
+        - post 
+      authLevel: anonymous
+      cors: True 
