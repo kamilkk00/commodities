@@ -27,3 +27,12 @@ functions:
         - post 
       authLevel: anonymous
       cors: True 
+
+  commodities_wti: 
+    handler: src.handlers.commodities.wti.handler
+    http:
+      path: commodities_wti
+      methods: 
+        - post 
+      authLevel: anonymous
+      cors: True 
