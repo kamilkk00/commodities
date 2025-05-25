@@ -4,13 +4,13 @@ from azure.cosmos import CosmosClient, exceptions
 
 class FetchBrentPrice:
     def __init__(self):
-        COSMOS_ENDPOINT_BRENT=os.environ.get("COSMOS_ENDPOINT_BRENT", "")
-        COSMOS_KEY_BRENT=os.environ.get("COSMOS_KEY_BRENT", "")
-        COSMOS_DB_BRENT=os.environ.get("COSMOS_DB_BRENT", "")
+        COSMOS_ENDPOINT_COMMODITIES=os.environ.get("COSMOS_ENDPOINT_COMMODITIES", "")
+        COSMOS_KEY_COMMODITIES=os.environ.get("COSMOS_KEY_COMMODITIES", "")
+        COSMOS_DB_COMMODITIES=os.environ.get("COSMOS_DB_COMMODITIES", "")
         COSMOS_CONTAINER_BRENT=os.environ.get("COSMOS_CONTAINER_BRENT", "")
 
-        client = CosmosClient(COSMOS_ENDPOINT_BRENT, credential=COSMOS_KEY_BRENT)
-        db_client = client.get_database_client(COSMOS_DB_BRENT)
+        client = CosmosClient(COSMOS_ENDPOINT_COMMODITIES, credential=COSMOS_KEY_COMMODITIES)
+        db_client = client.get_database_client(COSMOS_DB_COMMODITIES)
         self.container = db_client.get_container_client(COSMOS_CONTAINER_BRENT)
 
     def lookup_by_date(self, date_str):

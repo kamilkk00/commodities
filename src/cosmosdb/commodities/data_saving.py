@@ -10,10 +10,10 @@ from utils.config import Config
 def main():
     # load your Cosmos settings
     cfg = Config()
-    endpoint   = cfg.COSMOS_ENDPOINT_BRENT
-    key        = cfg.COSMOS_KEY_BRENT
-    database   = cfg.COSMOS_DB_BRENT
-    container  = cfg.COSMOS_CONTAINER_BRENT
+    endpoint   = cfg.COSMOS_ENDPOINT_COMMODITIES
+    key        = cfg.COSMOS_KEY_COMMODITIES
+    database   = cfg.COSMOS_DB_COMMODITIES
+    container  = cfg.COSMOS_CONTAINER_WTI
 
     # create client + container handle
     client = CosmosClient(endpoint, credential=key)
@@ -22,7 +22,7 @@ def main():
         .get_container_client(container)
 
     # stream through your JSONL and upsert each document
-    with open("brent.jsonl", "r", encoding="utf-8") as f:
+    with open("wti.jsonl", "r", encoding="utf-8") as f:
         for line in f:
             doc = json.loads(line)
             try:
