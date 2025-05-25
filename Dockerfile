@@ -1,7 +1,6 @@
 # Dockerfile
 FROM mcr.microsoft.com/azure-functions/python:4-python3.12-appservice
 
-# Tell Functions where your code lives & enable console logging
 ENV AzureWebJobsScriptRoot=/home/site/wwwroot \
     AzureFunctionsJobHost__Logging__Console__IsEnabled=true \
     FUNCTIONS_WORKER_RUNTIME=python \
