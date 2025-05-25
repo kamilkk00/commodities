@@ -1,21 +1,17 @@
 import os
-import sys
-import json
 from azure.cosmos import CosmosClient, exceptions
 
-# add project root to path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
-from utils.config import Config
 
 class FetchBrentPrice:
     def __init__(self):
-        cfg = Config()
-        client = CosmosClient(
-            cfg.COSMOS_ENDPOINT_BRENT,
-            credential=cfg.COSMOS_KEY_BRENT
-        )
-        database = client.get_database_client(cfg.COSMOS_DB_BRENT)
-        self.container = database.get_container_client(cfg.COSMOS_CONTAINER_BRENT)
+        COSMOS_ENDPOINT_BRENT=os.environ.get("COSMOS_ENDPOINT_BRENT", "")
+        COSMOS_KEY_BRENT=os.environ.get("COSMOS_KEY_BRENT", "")
+        COSMOS_DB_BRENT=os.environ.get("COSMOS_DB_BRENT", "")
+        COSMOS_CONTAINER_BRENT=os.environ.get("COSMOS_CONTAINER_BRENT", "")
+
+        client = CosmosClient(COSMOS_ENDPOINT_BRENT, credential=COSMOS_KEY_BRENT)
+        db_client = client.get_database_client(COSMOS_DB_BRENT)
+        self.container = db_client.get_container_client(COSMOS_CONTAINER_BRENT)
 
     def lookup_by_date(self, date_str):
         try:
